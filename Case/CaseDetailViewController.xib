@@ -14,12 +14,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CaseDetailViewController" customModule="iCarousel_Demo" customModuleProvider="target">
             <connections>
                 <outlet property="bgPortraintImg" destination="7Xf-df-2BV" id="5Gx-OD-LRI"/>
+                <outlet property="introducTopCons" destination="d3K-Af-gzf" id="E1w-kp-zYk"/>
                 <outlet property="introductionV" destination="Er5-Mo-cjd" id="hnC-Cw-m3N"/>
                 <outlet property="leftMargin" destination="SM5-g4-GJN" id="VUN-YX-h3r"/>
                 <outlet property="locationL" destination="cEp-am-1t8" id="jWl-gW-kcH"/>
                 <outlet property="moneyL" destination="3No-4v-CFe" id="sDN-J8-fFm"/>
                 <outlet property="nameL" destination="bDo-2W-clK" id="bOm-4B-eFT"/>
                 <outlet property="portraitImg" destination="66v-3F-jkM" id="9Az-Z1-8UM"/>
+                <outlet property="portraitImgCenter" destination="B4H-La-QpA" id="3H6-NE-iv0"/>
                 <outlet property="portraitRightImg" destination="deP-Sf-pzo" id="90D-6R-dP9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -33,7 +35,7 @@
                     <rect key="frame" x="0.0" y="165" width="375" height="502"/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="12" translatesAutoresizingMaskIntoConstraints="NO" id="66v-3F-jkM">
-                    <rect key="frame" x="155" y="0.0" width="64" height="64"/>
+                    <rect key="frame" x="155.5" y="0.0" width="64" height="64"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="66v-3F-jkM" secondAttribute="height" multiplier="1:1" id="H1m-Wu-jiO"/>
                         <constraint firstAttribute="width" constant="64" id="L7z-0t-Hze"/>
@@ -43,7 +45,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView hidden="YES" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="14" translatesAutoresizingMaskIntoConstraints="NO" id="deP-Sf-pzo">
-                    <rect key="frame" x="219" y="0.0" width="64" height="64"/>
+                    <rect key="frame" x="219.5" y="0.0" width="64" height="64"/>
                 </imageView>
                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="1234" translatesAutoresizingMaskIntoConstraints="NO" id="7Xf-df-2BV">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>

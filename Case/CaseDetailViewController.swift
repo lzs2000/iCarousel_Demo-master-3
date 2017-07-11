@@ -27,7 +27,9 @@ class CaseDetailViewController: UIViewController {
     
     @IBOutlet weak var leftMargin: NSLayoutConstraint!
    
+    @IBOutlet weak var portraitImgCenter: NSLayoutConstraint!
    
+    @IBOutlet weak var introducTopCons: NSLayoutConstraint!
     
     
     let changeNavigationBar = "changeNavigationBar"
@@ -98,10 +100,11 @@ extension CaseDetailViewController {
                
                 self.portraitRightImg.isHidden = true
             }
-           // self.portraitRightImg.isHidden = true
+
             self.bgPortraintImg.backgroundColor = UIColor.clear
             self.introductionV.backgroundColor = UIColor.clear
             self.view.superview?.subviews[3].backgroundColor = UIColor.clear
+           
             self.bgPortraintImg.image = UIImage(named: "alpha0-1")
             self.setNavState()
             isScroll = true
@@ -115,9 +118,10 @@ extension CaseDetailViewController {
 
                     UIView.animate(withDuration: 0.3, animations: {
                         self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-                        //self.setCollectionViewAlPha(alpha: 1.0)
+                        self.setCollectionViewAlPha(alpha: 0.0)
                     }, completion: { (_ ) in
                         self.setNavState()
+                        
                     })
                     
                 } else {
@@ -130,9 +134,7 @@ extension CaseDetailViewController {
                         self.introductionV.backgroundColor = UIColor.white
                         self.view.superview?.subviews[3].backgroundColor = UIColor.white
                         self.bgPortraintImg.image = UIImage(named: "1234")
-                        if self.portraitRightImg.center.x != self.bgPortraintImg.center.x {
-                             self.leftMargin.constant = 0
-                        }
+
                     })
                 }
                 
@@ -140,7 +142,7 @@ extension CaseDetailViewController {
                 if self.collectionviewH + 100 - self.view.frame.origin.y > 200 {
                     UIView.animate(withDuration: 0.5, animations: { 
                         self.view.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height)
-                        self.setCollectionViewAlPha(alpha: 1.0)
+                        //self.setCollectionViewAlPha(alpha: 1.0)
                     }, completion: { (_ ) in
                          self.setNavState()
                                             })
@@ -151,14 +153,10 @@ extension CaseDetailViewController {
                        
                         self.setCollectionViewAlPha(alpha: 1.0)
                     },  completion: { (_) in
-                        if self.portraitRightImg.center.x != self.bgPortraintImg.center.x {
-                            self.leftMargin.constant = 0
-                        }
-
                         
                         self.view.superview?.subviews[3].backgroundColor = UIColor.white
                         self.bgPortraintImg.image = UIImage(named: "1234")
-                          //self.leftMargin.constant = 0
+
                     })
                 }
             }
@@ -173,24 +171,27 @@ extension CaseDetailViewController {
         case .changed:
             self.setNavState()
             let translation = panGesture.translation(in: self.view).y
-            
+      
             if (translation == 0 && panGesture.translation(in: self.view).x != 0) {
                 return;
             }
             if isScroll {
                 let tempView = panGesture.view
+              //  print(translation)
                 
                 if translation > 0  {
                      //print(self.view.frame.origin.y)
                     scrollState = .kScrollStateDown
-                   self.view.superview?.subviews[2].alpha = 1 - abs(self.view.frame.origin.y - (collectionviewH + 100))/250
+                   //self.view.superview?.subviews[2].alpha = 1 - abs(self.view.frame.origin.y - (collectionviewH + 100))/250
 
                 } else {
                     scrollState = .kScrollStateUp
-                    self.view.superview?.subviews[2].alpha = 1 - abs(self.view.frame.origin.y - (collectionviewH + 100))/250
+                   // self.view.superview?.subviews[2].alpha = 1 - abs(self.view.frame.origin.y - (collectionviewH + 100))/250
                     
                 }
-               
+                if self.view.frame.origin.y > 100 {
+                    self.view.superview?.subviews[2].alpha = 1 - abs(self.view.frame.origin.y - (collectionviewH + 100))/250
+                }
                 
                 let translation = panGesture.translation(in: tempView?.superview)
                 tempView?.center = CGPoint(x: (tempView?.center.x)!, y: (tempView?.center.y)! + translation.y)
@@ -210,6 +211,8 @@ extension CaseDetailViewController {
         if self.view.frame.origin.y < 10 {
             if !changeNav {
                 changeNav = true
+                let collectionView =  self.view.superview?.subviews[2]
+                collectionView?.isHidden = false
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: changeNavigationBar), object: self, userInfo: ["changeNav": changeNav])
             }
             

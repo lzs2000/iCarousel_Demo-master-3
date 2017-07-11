@@ -9,9 +9,16 @@
 import UIKit
 
 
+public enum kScrollDirection {
+    case kScrollDirectionLeft
+    case kScrollDirectionRight
+   
+}
 
 var isScroll : Bool!
 var scrollState: kScrollState!
+var scrollDirection: kScrollDirection!//记录上面的collectionview往左滑动还是往右滑动
+
 class CaseViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource {
     var collectionviewH: CGFloat = UIScreen.main.bounds.size.height * 3 / 5
     
@@ -22,9 +29,7 @@ class CaseViewController: UIViewController,UICollectionViewDelegate, UICollectio
     var imageViewAvatar = UIImageView()
     var nameLabel = UILabel()
     var tempTitleView = UIView()
-    
-    
-
+    var lastIndex:NSInteger?
     lazy var imageArray: [String] = {
         
         var array: [String] = []
@@ -40,7 +45,7 @@ class CaseViewController: UIViewController,UICollectionViewDelegate, UICollectio
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.lastIndex = 0
         let collectionView =  UICollectionView(frame: CGRect(x: 0, y: 100, width: self.view.bounds.width, height: collectionviewH), collectionViewLayout: LineLayout())
         collectionView.backgroundColor = UIColor.white
         collectionView.dataSource  = self
@@ -130,24 +135,34 @@ class CaseViewController: UIViewController,UICollectionViewDelegate, UICollectio
         
         //collectionView.deleteItems(at: [indexPath])
     }
+    
+   
 
     //Mark--获取当前collectionview中间那个cell所在的下标
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pInView = self.view.convert((self.collectionView?.center)!, to: self.collectionView)
         let indexPathNow = self.collectionView?.indexPathForItem(at: pInView)
+        if (indexPathNow?.row)! > self.lastIndex! {
+            scrollDirection = .kScrollDirectionRight
+        } else {
+            scrollDirection = .kScrollDirectionLeft
+        }
+        self.lastIndex = indexPathNow?.row
         if indexPathNow?.row == self.currentIndexPath {
             return
         } else {
              self.currentIndexPath = (indexPathNow?.row)!
         }
+        self.caseDetailV.introducTopCons.constant += 100
+        self.caseDetailV.introductionV.alpha = 0.0
         UIView.animate(withDuration: 0.01, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [], animations: {
-            self.caseDetailV.introductionV.alpha = 0.0
-            self.caseDetailV.introductionV.center.y += 100
+            self.view.layoutIfNeeded()
         }) { (result) in
             if (result) {
+                self.caseDetailV.introducTopCons.constant -= 100
+                self.caseDetailV.introductionV.alpha = 1.0
                 UIView.animate(withDuration: 0.99, delay: 0.0, usingSpringWithDamping:0.8, initialSpringVelocity: 0.0,  options: [], animations: {
-                    self.caseDetailV.introductionV.center.y -= 100
-                    self.caseDetailV.introductionV.alpha = 1.0
+                    self.view.layoutIfNeeded()
                 }, completion: nil)
 
             }
@@ -159,41 +174,39 @@ class CaseViewController: UIViewController,UICollectionViewDelegate, UICollectio
             self.caseDetailV.portraitRightImg.isHidden = false
         }
        
-        
+        if (self.caseDetailV.portraitRightImg.center.x < self.caseDetailV.portraitImg.center.x) {
+            //让portraitImg从左到右
+            self.caseDetailV.portraitImgCenter.constant = 0.0
+        } else {
+            //让portraitImgRight从左到右
+            self.caseDetailV.portraitImgCenter.constant += self.caseDetailV.portraitImg.frame.size.width
+        }
         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping:0.8, initialSpringVelocity: 0.0,  options: [], animations: {
-            if (self.caseDetailV.portraitRightImg.center.x < self.caseDetailV.portraitImg.center.x) {
-                self.caseDetailV.portraitImg.alpha = 1
-                self.caseDetailV.portraitRightImg.center.x -= (self.caseDetailV.portraitImg.frame.size.width)
-                self.caseDetailV.portraitImg.center.x = self.view.center.x
-            } else {
-                self.caseDetailV.portraitRightImg.alpha = 1
-                self.caseDetailV.portraitImg.center.x -= (self.caseDetailV.portraitImg.frame.size.width)
-                self.caseDetailV.portraitRightImg.center.x = self.view.center.x
+            self.view.layoutIfNeeded()
+        }, completion: { (_) in
+             //portraitRightImg在pportraitImg左边 显示的是portraitRightImg
+            if (self.caseDetailV.portraitImg.center.x < self.caseDetailV.portraitRightImg.center.x && self.caseDetailV.portraitRightImg.center.x == self.caseDetailV.bgPortraintImg.center.x) {
+                //让不显示的portraitRightImg跑到右边
+                    self.caseDetailV.portraitImg.isHidden = true
+                    self.caseDetailV.leftMargin.constant -= 2 * self.caseDetailV.portraitImg.frame.size.width
+                    self.caseDetailV.portraitImgCenter.constant -= 2 * self.caseDetailV.portraitImg.frame.size.width
             }
-        }, completion: nil)
+            //portraitImg在portraitRightImg左边 显示的是portraitImg
+            if(self.caseDetailV.portraitImg.center.x == self.caseDetailV.bgPortraintImg.center.x && self.caseDetailV.portraitRightImg.center.x < self.caseDetailV.portraitImg.center.x) {
+                //让不显示的portraitImg跑到右边
+                 self.caseDetailV.leftMargin.constant = 0.0
+            }
+           UIView.animate(withDuration: 0.01, delay: 0.0, usingSpringWithDamping:0.8, initialSpringVelocity: 0.0,  options: [], animations: {
+            self.view.layoutIfNeeded()
+                        }, completion: nil)
+            
+        })
        
         
         
     }
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        UIView.animate(withDuration: 0.33, delay: 0.0, usingSpringWithDamping:0.8, initialSpringVelocity: 0.0,  options: [], animations: {
-            if (self.caseDetailV.portraitImg.center.x < self.caseDetailV.portraitRightImg.center.x && self.caseDetailV.portraitRightImg.center.x == self.caseDetailV.bgPortraintImg.center.x) {
-                self.caseDetailV.portraitImg.isHidden = true
-                self.caseDetailV.portraitImg.center.x += (self.caseDetailV.portraitImg.frame.size.width) * 2
-                
-            }
-            if (self.caseDetailV.portraitRightImg.center.x < self.caseDetailV.portraitImg.center.x && self.caseDetailV.portraitImg.center.x == self.caseDetailV.bgPortraintImg.center.x){
-                 self.caseDetailV.portraitRightImg.isHidden = true
-                self.caseDetailV.portraitRightImg.center.x += (self.caseDetailV.portraitImg.frame.size.width) * 2
-               
-            }
-        }, completion: nil)
-    }
-   
     
-   
-    
-    
+  
 
 }
 

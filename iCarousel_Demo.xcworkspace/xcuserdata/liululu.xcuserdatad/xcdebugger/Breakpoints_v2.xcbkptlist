@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Case/CaseDetailViewController.swift"
-            timestampString = "520743752.418765"
+            timestampString = "521450475.748078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
             landmarkName = "didPan(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Case/CaseDetailViewController.swift"
-            timestampString = "520743806.608875"
+            timestampString = "521450487.194455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "didPan(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "setCollectionViewAlPha(alpha:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Case/CaseViewController.swift"
-            timestampString = "520744417.706531"
+            filePath = "Case/CaseDetailViewController.swift"
+            timestampString = "521450675.955743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "scrollViewWillBeginDecelerating(_:)"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "setCollectionViewAlPha(alpha:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,45 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Case/CaseViewController.swift"
-            timestampString = "520744418.644062"
+            filePath = "Case/CaseDetailViewController.swift"
+            timestampString = "521450677.144348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "scrollViewWillBeginDecelerating(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Case/CaseViewController.swift"
-            timestampString = "520744753.774826"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "scrollViewDidEndDecelerating(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Case/CaseViewController.swift"
-            timestampString = "520744759.972243"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "scrollViewDidEndDecelerating(_:)"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "setCollectionViewAlPha(alpha:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
