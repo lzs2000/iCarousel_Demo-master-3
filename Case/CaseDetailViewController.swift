@@ -26,7 +26,6 @@ class CaseDetailViewController: UIViewController {
     @IBOutlet weak var nameL: UILabel!
     
     @IBOutlet weak var leftMargin: NSLayoutConstraint!
-   
     @IBOutlet weak var portraitImgCenter: NSLayoutConstraint!
    
     @IBOutlet weak var introducTopCons: NSLayoutConstraint!
